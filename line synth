@@ -1,0 +1,117 @@
+int x1 = 88;
+int x2 = 99;
+int y1 = 88;
+int y2 = 99;
+
+ArrayList<PVector> points = new ArrayList<PVector>();
+
+void setup() {
+
+    size(1000 , 1000);
+}
+
+void mousePressed() {
+    x1=mouseX;
+    y1=mouseY;
+    points.add(new PVector(x1, y1));//in the array called points, start point added
+}
+
+void mouseDragged() {
+
+    x2=mouseX;
+    y2=mouseY;
+    
+    //println ("x1 is currently " + x1);
+    //println ("x2 is currently " + x2);
+    
+  if(abs(x2-x1)<15) // learning moment: did not add abs and that will not work at all!!
+     {x2=x1;}
+  else 
+     {x2=mouseX;}
+  
+  if(abs(y2-y1)<15)
+     {y2=y1;}
+  else 
+    {y2=mouseY;}
+
+}
+
+
+ /*
+  psudocode for thinking
+  Overengineering is extreamly bad and is not to happen again
+  
+  vectorpoint start x and y are just mouse xy, and will not be modified. Processed at mousePressed
+  
+  vectorpint end x and y need to change
+  end y should be at same y start value if y has not changed much
+  -- so not change if y2-y1 or y1-y2 <10 ****this is wrong and more complex than this!!!!*****
+  ---- so, y2 = y1 if current location of mouseY is similar to y1 which has been written to array
+  This code part is to be run repetativy.
+  
+  */
+void mouseReleased() {
+  
+    points.add(new PVector(x2, y2));
+    
+    println ("");
+    println (points);
+    println ("");
+    
+    synthesizer();
+    
+}
+
+void draw() {
+
+
+    background(0);
+    stroke(255);
+    strokeWeight(16);
+    
+    for (int i = 0; i < points.size(); i += 2) {
+
+        PVector p1 = points.get(i);
+        boolean even = i+1 < points.size();
+        PVector p2 = even ? points.get(i+1) : new PVector(mouseX, mouseY);
+        
+
+        line(p1.x, p1.y, p2.x, p2.y);
+
+    }
+}
+
+void synthesizer() {
+    println ("");
+    println ("//========================synth start:========================");
+    println ("size(1000 , 1000); // window size set as 1000x1000");
+    println ("background(0); // background color set as black");
+    println ("strokeWeight(16); // thickness of stroke");
+    println ("");
+    
+    
+  for (int i = 0; i < points.size(); i += 2) {
+
+  int r = int(random(255/20)*20); // /20 and * 20 to squeze the dimentioness of color, so they look different
+  int g = int(random(255/20)*20);
+  int b = int(random(255/20)*20);
+  
+  println ("stroke (" + r + " , " + g + " , " + b + ");"); //for computer, color
+  
+        PVector p1 = points.get(i);
+        boolean even = i+1 < points.size();
+        PVector p2 = even ? points.get(i+1) : new PVector(mouseX, mouseY);
+        
+  println("line(" + p1.x + " , " + p1.y + " , " + p2.x + " , " +p2.y + ");"); //for computer, line
+
+  println ("//Draw a line from point (" + p1.x + " , " + p1.y + ") to point (" + p2.x + " , " +p2.y + ")."); // for human
+  println (""); // complex but very satisfying
+
+    }
+    
+ println ("//Load me back into synth is needed:");
+  print ("//");
+println (points);
+  
+   println ("");
+}
