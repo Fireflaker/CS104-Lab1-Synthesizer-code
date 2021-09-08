@@ -1,0 +1,35 @@
+int d=100; 
+size(315,140);
+strokeWeight(5);
+
+fill(#AA8888); // squares fill
+rect(20,20,d,d);
+fill(#00FF00);
+rect(170,45,d/2,d/2);
+fill(#1111FF);
+rect(270,57.5,d/4,d/4);
+
+strokeWeight(20); // 1st big square points
+stroke(#000000);
+point(20,20);
+stroke(#555555);
+point(20+d,20);
+stroke(#AAAAAA);
+point(20,20+d);
+stroke(#EEEEEE);
+point(20+d,20+d);
+
+//int ur2=170+d/2;
+//int ul2=45;
+//int dr2=45+d/2;
+//int dl2=170;
+
+point(170,45);
+point(170+d/2,45);
+point(170,45+d/2);
+point(170+d/2,45+d/2);
+
+point(270,57.5);
+point(270+d/4,57.5);
+point(270,57.5+d/4);
+point(270+d/4,57.5+d/4);
